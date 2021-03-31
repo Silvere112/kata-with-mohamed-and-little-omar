@@ -5,6 +5,8 @@ import mixter.domain.Event;
 import mixter.domain.core.message.MessageId;
 import mixter.domain.identity.UserId;
 
+import java.util.Objects;
+
 public class MessageQuacked implements Event {
     private final MessageId messageId;
     private final String message;
@@ -27,9 +29,9 @@ public class MessageQuacked implements Event {
 
         MessageQuacked that = (MessageQuacked) o;
 
-        if (messageId != null ? !messageId.equals(that.messageId) : that.messageId != null) return false;
-        if (message != null ? !message.equals(that.message) : that.message != null) return false;
-        return !(authorId != null ? !authorId.equals(that.authorId) : that.authorId != null);
+        if (!Objects.equals(messageId, that.messageId)) return false;
+        if (!Objects.equals(message, that.message)) return false;
+        return Objects.equals(authorId, that.authorId);
 
     }
 
