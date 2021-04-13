@@ -29,7 +29,7 @@ public class Message {
     }
 
     public void reQuack(UserId userId, EventPublisher eventPublisher, UserId authorId, String message) {
-        if (projection.publishers.contains(userId)) {
+        if (projection.publishers.contains(userId) || projection.isDeleted()) {
             return;
         }
         MessageRequacked event = new MessageRequacked(projection.getId(), userId, authorId, message);
@@ -73,7 +73,11 @@ public class Message {
         }
 
         public boolean isNotDeleted() {
-            return !deleted;
+            return !isDeleted();
+        }
+
+        public boolean isDeleted() {
+            return deleted;
         }
     }
 }
