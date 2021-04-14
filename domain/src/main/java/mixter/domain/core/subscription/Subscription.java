@@ -31,20 +31,24 @@ public class Subscription {
     }
 
     public void notifyFollower(MessageId messageId, EventPublisher eventPublisher) {
-        eventPublisher.publish(new FolloweeMessageQuacked(projection.id, messageId));
+        if (!projection.canceled) {
+            eventPublisher.publish(new FolloweeMessageQuacked(projection.id, messageId));
+        }
     }
-
     @Projection
     private class SubscriptionProjection extends DecisionProjectionBase {
         private SubscriptionId id;
-
+        private boolean canceled;
         public SubscriptionProjection(List<Event> history) {
             super.register(UserFollowed.class, this::apply);
+            super.register(UserUnfollowed.class, this::apply);
             history.forEach(this::apply);
         }
-
         private void apply(UserFollowed event) {
             this.id = event.getSubscriptionId();
+        }
+        private void apply(UserUnfollowed event) {
+            this.canceled = true;
         }
     }
 }
