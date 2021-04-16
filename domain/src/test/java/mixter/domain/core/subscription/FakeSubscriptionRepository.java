@@ -13,6 +13,9 @@ public class FakeSubscriptionRepository implements SubscriptionRepository {
 
     @Override
     public Subscription getById(SubscriptionId subscriptionId) {
-        return subscriptions.stream().filter(subscription -> subscription.getId().equals(subscriptionId)).findFirst().get();
+        return subscriptions.stream()
+                .filter(subscription -> subscription.getId().equals(subscriptionId))
+                .findFirst()
+                .get();
     }
 }

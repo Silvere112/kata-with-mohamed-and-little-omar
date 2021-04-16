@@ -15,6 +15,14 @@ public class FolloweeMessageQuacked implements Event {
     }
 
     @Override
+    public String toString() {
+        return "FolloweeMessageQuacked{" +
+                "subscriptionId=" + subscriptionId +
+                ", messageId=" + messageId +
+                '}';
+    }
+
+    @Override
     public AggregateId getId() {
         return messageId;
     }

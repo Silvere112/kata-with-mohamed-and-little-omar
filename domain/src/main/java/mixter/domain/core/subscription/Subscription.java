@@ -35,6 +35,11 @@ public class Subscription {
             eventPublisher.publish(new FolloweeMessageQuacked(projection.id, messageId));
         }
     }
+
+    public SubscriptionId getId() {
+        return projection.id;
+    }
+
     @Projection
     private class SubscriptionProjection extends DecisionProjectionBase {
         private SubscriptionId id;

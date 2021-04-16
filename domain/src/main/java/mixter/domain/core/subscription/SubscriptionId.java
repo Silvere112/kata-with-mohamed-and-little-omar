@@ -25,6 +25,14 @@ public class SubscriptionId implements AggregateId {
     }
 
     @Override
+    public String toString() {
+        return "SubscriptionId{" +
+                "follower=" + follower +
+                ", followee=" + followee +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         int result = follower != null ? follower.hashCode() : 0;
         result = 31 * result + (followee != null ? followee.hashCode() : 0);
