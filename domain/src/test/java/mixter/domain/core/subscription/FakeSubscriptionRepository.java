@@ -1,7 +1,10 @@
 package mixter.domain.core.subscription;
 
+import mixter.domain.identity.UserId;
 import org.assertj.core.util.Sets;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.Iterator;
 import java.util.Set;
 
 public class FakeSubscriptionRepository implements SubscriptionRepository {
@@ -17,5 +20,10 @@ public class FakeSubscriptionRepository implements SubscriptionRepository {
                 .filter(subscription -> subscription.getId().equals(subscriptionId))
                 .findFirst()
                 .get();
+    }
+
+    @Override
+    public Iterator<Subscription> getSubscriptionsOfUser(UserId userId) {
+        throw new NotImplementedException();
     }
 }
