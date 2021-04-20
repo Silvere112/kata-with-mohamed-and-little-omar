@@ -8,7 +8,6 @@ import mixter.domain.core.message.events.MessageQuacked;
 import mixter.domain.identity.UserId;
 import org.junit.Before;
 import org.junit.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -53,7 +52,6 @@ public class UpdateTimelineTest {
         handler.apply(messageDeleted);
         // Then
         assertThat(timelineRepository.getDeletedMessageIds()).containsExactly(messageId);
-
     }
 
     class TimelineMessageRepositoryFake implements TimelineMessageRepository {
@@ -77,12 +75,12 @@ public class UpdateTimelineTest {
 
         @Override
         public Iterator<TimelineMessageProjection> getMessageOfUser(UserId ownerId) {
-            throw new NotImplementedException();
+            throw new IllegalStateException();
         }
 
         @Override
         public void delete(MessageId messageId) {
-            throw new NotImplementedException();
+            deletedMessageIds.add(messageId);
         }
 
     }

@@ -13,6 +13,11 @@ public class MessageDeleted implements Event {
         this.messageId = messageId;
     }
 
+    public MessageId getMessageId() {
+        return messageId;
+    }
+
+
     @Override
     public AggregateId getId() {
         return null;
