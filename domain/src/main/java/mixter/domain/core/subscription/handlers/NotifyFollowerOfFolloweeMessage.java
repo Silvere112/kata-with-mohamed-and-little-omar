@@ -3,6 +3,7 @@ package mixter.domain.core.subscription.handlers;
 import mixter.doc.Handler;
 import mixter.domain.EventPublisher;
 import mixter.domain.core.message.events.MessageQuacked;
+import mixter.domain.core.message.events.MessageRequacked;
 import mixter.domain.core.subscription.FollowerRepository;
 import mixter.domain.core.subscription.SubscriptionId;
 import mixter.domain.core.subscription.SubscriptionRepository;
@@ -26,5 +27,9 @@ public class NotifyFollowerOfFolloweeMessage {
         Set<UserId> followers = this.followerRepository.getFollowers(messageQuacked.getAuthorId());
         SubscriptionId subscriptionId = new SubscriptionId(followers.stream().findFirst().get(), messageQuacked.getAuthorId());
         this.eventPublisher.publish(new FolloweeMessageQuacked(subscriptionId, messageQuacked.getMessageId()));
+    }
+
+    public void apply(MessageRequacked messageRequacked) {
+        apply(new MessageQuacked(messageRequacked.getMessageId(), messageRequacked.getMessage(), messageRequacked.getAuthorId()));
     }
 }
